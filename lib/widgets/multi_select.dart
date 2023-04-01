@@ -15,7 +15,7 @@ class MultiSelectDdl {
   MultiSelectDdl({required this.selectedValues, required this.setStateFunction, required this.onConfirm, required this.title, required this.items});
 
   Widget multiSelectDdl () {
-    List<MultiSelectItem> dropDownData = [MultiSelectItem("0", "Select All")];
+    List<MultiSelectItem> dropDownData = [MultiSelectItem("all", "Select All")];
 
     items.forEach((key, value) {
       dropDownData.add(MultiSelectItem(key, value));
@@ -56,17 +56,7 @@ class MultiSelectDdl {
       searchable: true,
       searchIcon: const Icon(Icons.search),
       onSelectionChanged: (keys) {
-        if (keys.contains("0")) {
-          print("$title-keys: $keys");
-          List<String> keysArr = [];
-          // keysArr = List.from(keys)..remove("0");
-          // keysArr = List.from(keys);
-          items.forEach((key, value) {keysArr.add(key);});
-          // keysArr.remove("0");
-          setStateFunction(keysArr);
-        }
-        // items.forEach((key, value) {keysArr.add(key);});
-
+        setStateFunction(keys);
       },
       onConfirm: (results) { onConfirm(results); },
     );
