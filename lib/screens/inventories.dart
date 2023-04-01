@@ -527,7 +527,7 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                       isStockOnlyAllItems == false ? '0' : '1',
                       allItemsOnWater == false ? '0' : '1'
                     ];
-                    // setState(() {Navigator.of(context).pop();});
+                    setState(() {Navigator.of(context).pop();});
                   },
                   style: const ButtonStyle(
                       padding: MaterialStatePropertyAll(EdgeInsets.zero)
@@ -547,23 +547,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Warehouses",
                   selectedValues: sWhIds,
                   setStateFunction: (keys) {
-                    sWhIds = [];
-                    whIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sWhIds = keys;
-                    whIds = keys;
+                    if(keys.contains("all")){
+                      sWhIds = warehouses.keys.toList();
+                      whIds = sWhIds.map(int.parse).toList();
+                      sWhIds.insert(0, "all");
 
-                    print("sWhIds: $sWhIds\nwhIds: $whIds");
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sWhIds = [];
                     whIds = [];
                     results.forEach((element) {
                       sWhIds.add(element.toString());
-                      whIds.add(int.parse(element));
+                      if(element != "all") {
+                        whIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -573,21 +574,27 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Food Services",
                   selectedValues: sFsIds,
                   setStateFunction: (keys) {
-                    sFsIds = [];
-                    fsIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sFsIds = keys;
-                    fsIds = keys;
+                    if(keys.contains("all")){
+                      sFsIds = foodServices.keys.toList();
+                      fsIds = sFsIds.map(int.parse).toList();
+                      sFsIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+
+                      print(keys);
+                      print("sFsIds: $sFsIds\nfsIds: $fsIds");
+                    }
                   },
                   onConfirm: (results) {
                     sFsIds = [];
                     fsIds = [];
                     results.forEach((element) {
                       sFsIds.add(element.toString());
-                      fsIds.add(int.parse(element));
+                      if(element != "all") {
+                        fsIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -597,21 +604,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Health Care",
                   selectedValues: sHcIds,
                   setStateFunction: (keys) {
-                    sHcIds = [];
-                    hcIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sHcIds = keys;
-                    hcIds = keys;
+                    if(keys.contains("all")){
+                      sHcIds = healthCare.keys.toList();
+                      hcIds = sHcIds.map(int.parse).toList();
+                      sHcIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sHcIds = [];
                     hcIds = [];
                     results.forEach((element) {
                       sHcIds.add(element.toString());
-                      hcIds.add(int.parse(element));
+                      if(element != "all") {
+                        hcIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -621,21 +631,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Hospitality",
                   selectedValues: sHIds,
                   setStateFunction: (keys) {
-                    sHIds = [];
-                    hIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sHIds = keys;
-                    hIds = keys;
+                    if(keys.contains("all")){
+                      sHIds = hospitality.keys.toList();
+                      hIds = sHIds.map(int.parse).toList();
+                      sHIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sHIds = [];
                     hIds = [];
                     results.forEach((element) {
                       sHIds.add(element.toString());
-                      hIds.add(int.parse(element));
+                      if(element != "all") {
+                        hIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -645,21 +658,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Automotive",
                   selectedValues: sAIds,
                   setStateFunction: (keys) {
-                    sAIds = [];
-                    aIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sAIds = keys;
-                    aIds = keys;
+                    if(keys.contains("all")){
+                      sAIds = automotive.keys.toList();
+                      aIds = sAIds.map(int.parse).toList();
+                      sAIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sAIds = [];
-                    aIds = [];
+                    whIds = [];
                     results.forEach((element) {
                       sAIds.add(element.toString());
-                      aIds.add(int.parse(element));
+                      if(element != "all") {
+                        whIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -669,21 +685,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "YMCA/ GYM/ Golf Towel",
                   selectedValues: sYcmaIds,
                   setStateFunction: (keys) {
-                    sYcmaIds = [];
-                    ycmaIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sYcmaIds = keys;
-                    ycmaIds = keys;
+                    if(keys.contains("all")){
+                      sYcmaIds = ycmaGymGt.keys.toList();
+                      ycmaIds = sYcmaIds.map(int.parse).toList();
+                      sYcmaIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sYcmaIds = [];
                     ycmaIds = [];
                     results.forEach((element) {
                       sYcmaIds.add(element.toString());
-                      ycmaIds.add(int.parse(element));
+                      if(element != "all") {
+                        ycmaIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -693,21 +712,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Promotional Towel",
                   selectedValues: sPtIds,
                   setStateFunction: (keys) {
-                    sPtIds = [];
-                    ptIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sPtIds = keys;
-                    ptIds = keys;
+                    if(keys.contains("all")){
+                      sPtIds = promotionalTowel.keys.toList();
+                      ptIds = sPtIds.map(int.parse).toList();
+                      sPtIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sPtIds = [];
-                    ptIds = [];
+                    whIds = [];
                     results.forEach((element) {
                       sPtIds.add(element.toString());
-                      ptIds.add(int.parse(element));
+                      if(element != "all") {
+                        ptIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -717,21 +739,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "vendors",
                   selectedValues: sVIds,
                   setStateFunction: (keys) {
-                    sVIds = [];
-                    vIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sVIds = keys;
-                    vIds = keys;
+                    if(keys.contains("all")){
+                      sVIds = vendors.keys.toList();
+                      vIds = sVIds.map(int.parse).toList();
+                      sVIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sVIds = [];
-                    vIds == [];
+                    vIds = [];
                     results.forEach((element) {
                       sVIds.add(element.toString());
-                      vIds.add(int.parse(element));
+                      if(element != "all") {
+                        vIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
@@ -741,21 +766,24 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
                   title: "Item Codes",
                   selectedValues: sIcIds,
                   setStateFunction: (keys) {
-                    sIcIds = [];
-                    icIds = [];
-                    setModalState(() {
-                      Navigator.of(context).pop();
-                    });
-                    // SPStorage.saveFilters("sWhIds", keys);
-                    sIcIds = keys;
-                    icIds = keys;
+                    if(keys.contains("all")){
+                      sIcIds = itemCodes.keys.toList();
+                      icIds = sIcIds.map(int.parse).toList();
+                      sIcIds.insert(0, "all");
+
+                      setModalState(() {
+                        Navigator.of(context).pop();
+                      });
+                    }
                   },
                   onConfirm: (results) {
                     sIcIds = [];
                     icIds = [];
                     results.forEach((element) {
                       sIcIds.add(element.toString());
-                      icIds.add(int.parse(element));
+                      if(element != "all") {
+                        icIds.add(int.parse(element));
+                      }
                     });
                   },
                 ).multiSelectDdl(),
