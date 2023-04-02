@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hrcotton_usa_new/api/storageSharedPreferences.dart';
-import 'package:hrcotton_usa_new/misc/app_colors.dart';
 import 'package:lottie/lottie.dart';
 import 'package:hrcotton_usa_new/styles/default_styles.dart';
-import 'package:hrcotton_usa_new/styles/inventories_screen_styles.dart';
 
 import '../api/api.dart';
 import '../widgets/multi_select.dart';
@@ -22,7 +20,8 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
       isStockOnlyAllItems = false,
       allItemsOnWater = false,
       isLoaded = false,
-      diableFilterBtn = false, isReset = false;
+      disableFilterBtn = false,
+      isReset = false;
   List<String> itemInfo = [];
   List<Widget> widgets = [], tempWidgets = [];
   List<List<dynamic>> filters = [];
@@ -203,7 +202,7 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     print("build inventories: $inventories");
     return Scaffold(
       // backgroundColor: Colors.blueGrey.shade900,
@@ -215,7 +214,7 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
             onPressed: isLoaded ? () async {
               widgets = [];
               inventories = [];
-              diableFilterBtn = false;
+              disableFilterBtn = false;
               isReset = true;
               SPStorage.resetSavedFilters();
               sWhIds = []; sFsIds =  []; sHcIds =  []; sHIds =  []; sAIds =  []; sYcmaIds =  []; sPtIds =  []; sVIds = sIcIds = [];
@@ -234,7 +233,7 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => diableFilterBtn ? null : showModalBottomSheet(
+        onPressed: () => disableFilterBtn ? null : showModalBottomSheet(
           context: context,
           isDismissible: true,
           isScrollControlled: true,
@@ -262,12 +261,12 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
         future: instance.getInventories(inventories),
         builder: (context, snapshot) {
           if(snapshot.connectionState != ConnectionState.done) {
-            diableFilterBtn = true;
+            disableFilterBtn = true;
             return Center(
               child: SizedBox(width: 200, child: Lottie.asset('assets/lottie/loading_circle_1.json')),
             );
           } else if(snapshot.hasData) {
-            diableFilterBtn = false;
+            disableFilterBtn = false;
             widgets = [];
             for (var element in instance.inventories) {
               String itemCode = element['ItemCode'].toString();
@@ -467,7 +466,7 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
               children: widgets,
             );
           } else {
-            diableFilterBtn = false;
+            disableFilterBtn = false;
             return const Center(
               child:  Text("There is nothing to show."),
             );
@@ -496,10 +495,10 @@ class _InventoriesScreenState extends State<InventoriesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Filters", style: InventoriesScreenStyles.h1),
+              const Text("Filters", style: DefaultStyles.h1),
               ElevatedButton(
                   onPressed: () async {
-                    diableFilterBtn = true;
+                    disableFilterBtn = true;
 
                     SPStorage.resetSavedFilters();
                     SPStorage.saveFilters("sWhIds", sWhIds);
