@@ -137,7 +137,7 @@ class Api {
     return "loaded";
   }
 
-  Future<void> getSaleInvoices(List<dynamic> args) async {
+  Future<String> getSaleInvoices(List<dynamic> args) async {
     List<int> cIds, whIds, iIds, hIds, pIds, icIds, cnIds, eIds, sIds;
     List<String> amIds = [], psIds = [];
     String fromDate, toDate, isInvoiceDeleted;
@@ -177,7 +177,8 @@ class Api {
       url += "&fromdate=${fromDate.isNotEmpty ? fromDate : 'null'}";
       url += "&todate=${toDate.isNotEmpty ? toDate : 'null'}";
 
-    } else {
+    }
+    else {
       url += createUrlParameters("InIds", []);
       url += createUrlParameters("&CIds", []);
       url += createUrlParameters("&PoIds", []);
@@ -196,6 +197,9 @@ class Api {
     print("url: $url");
     Response response = await get(Uri.parse(url));
     saleInvoices = await jsonDecode(response.body);
+
+    print("saleInvoices: $saleInvoices");
+    return "loaded";
   }
 
   Future<String> getSaleInvoicesFilters() async {

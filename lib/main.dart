@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hrcotton_usa_new/screens/home_screen.dart';
 import 'package:hrcotton_usa_new/screens/inventories.dart';
 import 'package:hrcotton_usa_new/screens/login.dart';
+import 'package:hrcotton_usa_new/screens/sales_invoices.dart';
 
 import 'api/storageSharedPreferences.dart';
 
@@ -36,8 +37,8 @@ class _MyAppState extends State<MyApp> {
         '/loginScreen': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
         '/inventories': (context) => const InventoriesScreen(),
+        '/saleInvoices': (context) => const SalesInvoicesScreen(),
         /*'/inventoryFilters': (context) => const InventoryFiltersScreen(),
-        '/saleInvoices': (context) => const SaleInvoicesScreen(),
         '/saleInvoicesFilters': (context) => const SalesInvoiceFiltersScreen(),
         '/poListScreen': (context) => const PoListScreen(),
         '/poListFiltersScreen': (context) => const PoListFiltersScreen(),

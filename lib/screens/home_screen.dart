@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hrcotton_usa_new/screens/sales_invoices.dart';
 import 'package:intl/intl.dart';
 
 import '../api/storageSharedPreferences.dart';
@@ -116,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
         "color": const Color(0xFF344A5F),
         "svgImage": SvgImages.invoice2,
         "title": "Invoice List",
-        "route": const Text("Testing"),
+        "route": const SalesInvoicesScreen(),
         // "route": const SaleInvoicesScreen(),
       },
       {
