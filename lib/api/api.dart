@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:localstorage/localstorage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   late String username, password;
@@ -308,7 +306,6 @@ class Api {
     List<dynamic> customers = data["Data"][0]['customers'];
 
     this.customers = customers;
-    print(customers);
     /*custBalanceFilters = [
       customers,
     ];*/
@@ -332,10 +329,8 @@ class Api {
       url += "&date=null";
     }
 
-    print(url);
     Response response = await get(Uri.parse(url));
     customers = await jsonDecode(response.body);
-    print("customers: $customers");
 
     return "loaded";
   }
